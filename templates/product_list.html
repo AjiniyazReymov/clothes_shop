@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="row">
+        {% if products %}
+         {% for product in products %}
+        <div class="col-lg-4 col-sm-4 ">
+              <div class="box_main">
+                 <h4 class="shirt_text"><a href="{% url 'detail' product.id %}">{{ product.name }}</a></h4>
+                 <div class="tshirt_img">
+                     {% if product.image %}<img src="{{ product.image.url }}" alt="product_photo"> {% else %} <p>Photo not added</p> {% endif %}
+                     <div>
+                         <p>{{ product.description|truncatewords:30 }}</p>
+                         <div class="buy_bt"><a href="{% url 'detail' product.id %}">Satip aliw</a></div>
+
+                         {% if product.favorite_set.exists %}
+                                    <a href="{% url 'remove_from_favorites' product.id %}">Удалить из избранного</a>
+                                {% else %}
+                                    <a href="{% url 'add_to_favorites' product.id %}">Saqlap qoyiw</a>
+                                {% endif %}
+                     </div>
+                 </div>
+              </div>
+        </div>
+        {% endfor %}
+         {% else %}
+            <p>Tovar tawilmadi</p>
+         {% endif %}
+    </div>
+
+{% endblock %}

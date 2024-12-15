@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}"> <!-- CSRF-токен для Django -->
+    <title>User Actions</title>
+</head>
+<body>
+    <h1>Действия пользователя</h1>
+
+    <!-- Форма для добавления действия -->
+    <div>
+        <h2>Добавить действие</h2>
+        <form id="addActionForm">
+            <label for="actionType">Тип действия:</label>
+            <select id="actionType" name="action_type">
+                <option value="ADD_TO_FAVORITE">Добавить в избранное</option>
+                <option value="PLACE_ORDER">Оформить заказ</option>
+                <option value="WRITE_REVIEW">Написать отзыв</option>
+            </select>
+            <br>
+            <label for="productId">ID продукта (если применимо):</label>
+            <input type="number" id="productId" name="product_id">
+            <br>
+            <label for="orderId">ID заказа (если применимо):</label>
+            <input type="number" id="orderId" name="order_id">
+            <br>
+            <button type="submit">Добавить действие</button>
+        </form>
+    </div>
+
+    <!-- Список действий -->
+    <div>
+        <h2>Ваши действия</h2>
+        <ul id="actionsList"></ul>
+    </div>
+
+    <!-- Подключение JS -->
+    <script>
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        // Функция для отображения списка действий
+        function fetchActions() {
+            fetch('/actions/', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                const actionsList = document.getElementById('actionsList');
+                actionsList.innerHTML = ''; // Очищаем список перед обновлением
+                data.actions.forEach(action => {
+                    const li = document.createElement('li');
+                    li.textContent = `${action.type} - ${action.product || 'N/A'} (Order ID: ${action.order_id || 'N/A'})`;
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Удалить';
+                    deleteButton.addEventListener('click', () => deleteAction(action.id));
+                    li.appendChild(deleteButton);
+                    actionsList.appendChild(li);
+                });
+            });
+        }
+
+        // Функция для добавления действия
+        document.getElementById('addActionForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const actionType = document.getElementById('actionType').value;
+            const productId = document.getElementById('productId').value;
+            const orderId = document.getElementById('orderId').value;
+
+            fetch('/actions/add/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken,
+                },
+                body: JSON.stringify({
+                    action_type: actionType,
+                    product_id: productId || null,
+                    order_id: orderId || null,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                fetchActions(); // Обновляем список действий
+            });
+        });
+
+        // Функция для удаления действия
+        function deleteAction(actionId) {
+            fetch(`/actions/delete/${actionId}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken,
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                fetchActions(); // Обновляем список действий
+            });
+        }
+
+        // Загрузка списка действий при загрузке страницы
+        document.addEventListener('DOMContentLoaded', fetchActions);
+    </script>
+</body>
+</html>

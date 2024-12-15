@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %} Delete review {% endblock %}
+
+{% block content %}
+<h3>Siz <b>{{ product.name }}</b> tovarina jazilgan usi kommentariyani oshiresizbe?</h3>
+
+    <p>
+        <b>comment:</b> {{ review.comment }}
+    </p>
+
+    <a class="btn btn-outline-danger" href="{% url 'delete-review' product.id review.id %}">yes</a> | <a class="btn btn-outline-primary" href="{% url 'detail' product.id %}">no</a>
+
+{% endblock %}

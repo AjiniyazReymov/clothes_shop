@@ -1,0 +1,254 @@
+{% extends 'base.html' %}
+{% load static %}
+
+   {% block content %}
+      <!-- fashion section start -->
+      <div class="fashion_section">
+         <div id="main_slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <div class="container">
+                     <h1 class="fashion_taital">Svetrlar </h1>
+                     <div class="fashion_section_2">
+                        <div class="row">
+                           {% for kurtka in kurtkalar %}
+                           <div class="col-lg-4 col-sm-4">
+                              <div class="box_main">
+                                 <h4 class="shirt_text">{{kurtka.name}}</h4>
+                                 <p class="price_text">Bahasi  <span style="color: #262626;">{{ kurtka.price }}</span></p>
+                                 <div class="electronic_img">{% if kurtka.image %}<img src="{{ kurtka.image.url }}" alt="product_photo"> {% else %} <p>Photo not added</p> {% endif %}</div>
+                                 <div class="btn_main">
+                                    <div class="buy_bt"><a href="{% url 'detail' kurtka.id %}">Satip aliw</a></div>
+                                    <div class="seemore_bt"><a href="{% url 'detail' kurtka.id %}">Kobirek</a></div>
+                                 </div>
+                              </div>
+                           </div>
+                           {% endfor %}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="carousel-item">
+                  <div class="container">
+                     <h1 class="fashion_taital">Svetrlar </h1>
+                     <div class="fashion_section_2">
+                        <div class="row">
+                           {% for kurtka in kurtkalar %}
+                           <div class="col-lg-4 col-sm-4">
+                              <div class="box_main">
+                                 <h4 class="shirt_text">{{kurtka.name}}</h4>
+                                 <p class="price_text">Bahasi  <span style="color: #262626;">{{ kurtka.price }}</span></p>
+                                 <div class="electronic_img">{% if kurtka.image %}<img src="{{ kurtka.image.url }}" alt="product_photo"> {% else %} <p>Photo not added</p> {% endif %}</div>
+                                 <div class="btn_main">
+                                    <div class="buy_bt"><a href="{% url 'detail' kurtka.id %}">Satip aliw</a></div>
+                                    <div class="seemore_bt"><a href="{% url 'detail' kurtka.id %}">Kobirek</a></div>
+                                 </div>
+                              </div>
+                           </div>
+                           {% endfor %}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="carousel-item">
+                  <div class="container">
+                     <h1 class="fashion_taital">Svetrlar </h1>
+                     <div class="fashion_section_2">
+                        <div class="row">
+                           {% for kurtka in products_by_category.category_id.latest %} %}
+                           <div class="col-lg-4 col-sm-4">
+                              <div class="box_main">
+                                 <h4 class="shirt_text">{{kurtka.name}}</h4>
+                                 <p class="price_text">Bahasi  <span style="color: #262626;">{{ kurtka.price }}</span></p>
+                                 <div class="electronic_img">{% if kurtka.image %}<img src="{{ kurtka.image.url }}" alt="product_photo"> {% else %} <p>Photo not added</p> {% endif %}</div>
+                                 <div class="btn_main">
+                                    <div class="buy_bt"><a href="{% url 'detail' kurtka.id %}">Satip aliw</a></div>
+                                    <div class="seemore_bt"><a href="{% url 'detail' kurtka.id %}">Kobirek</a></div>
+                                 </div>
+                              </div>
+                           </div>
+                           {% endfor %}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
+            <i class="bi bi-caret-left"></i>
+            </a>
+            <a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
+            <i class="bi bi-caret-right"></i>
+            </a>
+         </div>
+      </div>
+      <!-- fashion section end -->
+      <!-- electronic section start -->
+      <div class="fashion_section">
+         <div id="electronic_main_slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <div class="container">
+                     <h1 class="fashion_taital">Kurtkalar</h1>
+                     <div class="fashion_section_2">
+                        <div class="row">
+                           {% for kurtka in kurtkalar %}
+                           <div class="col-lg-4 col-sm-4">
+                              <div class="box_main">
+                                 <h4 class="shirt_text">{{ kurtka.name }}</h4>
+                                 <p class="price_text">Bahasi  <span style="color: #262626;">{{ kurtka.price }}</span></p>
+                                 <div class="electronic_img">{% if kurtka.image %}<img src="{{ kurtka.image.url }}" alt="product_photo"> {% else %} <p>Photo not added</p> {% endif %}</div>
+                                 <div class="btn_main">
+                                    <div class="buy_bt"><a href="#">Satip aliw</a></div>
+                                    <div class="seemore_bt"><a href="#">Kobirek</a></div>
+                                 </div>
+                              </div>
+                           </div>
+                           {% endfor %}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="carousel-item">
+                  <div class="container">
+                     <h1 class="fashion_taital">Kurtkalar </h1>
+                     <div class="fashion_section_2">
+                        <div class="row">
+                           {% for kurtka in kurtkalar %}
+                           <div class="col-lg-4 col-sm-4">
+                              <div class="box_main">
+                                 <h4 class="shirt_text">{{kurtka.name}}</h4>
+                                 <p class="price_text">Bahasi  <span style="color: #262626;">{{ kurtka.price }}</span></p>
+                                 <div class="electronic_img">{% if kurtka.image %}<img src="{{ kurtka.image.url }}" alt="product_photo"> {% else %} <p>Photo not added</p> {% endif %}</div>
+                                 <div class="btn_main">
+                                    <div class="buy_bt"><a href="{% url 'detail' kurtka.id %}">Satip aliw</a></div>
+                                    <div class="seemore_bt"><a href="{% url 'detail' kurtka.id %}">Kobirek</a></div>
+                                 </div>
+                              </div>
+                           </div>
+                           {% endfor %}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="carousel-item">
+                  <div class="container">
+                     <h1 class="fashion_taital">Kurtkalar </h1>
+                     <div class="fashion_section_2">
+                        <div class="row">
+                           {% for kurtka in kurtkalar %}
+                           <div class="col-lg-4 col-sm-4">
+                              <div class="box_main">
+                                 <h4 class="shirt_text">{{ kurtka.name }}</h4>
+                                 <p class="price_text">Bahasi  <span style="color: #262626;">{{ kurtka.price }}</span></p>
+                                 <div class="electronic_img">{% if kurtka.image %}<img src="{{ kurtka.image.url }}" alt="product_photo"> {% else %} <p>Photo not added</p> {% endif %}</div>
+                                 <div class="btn_main">
+                                    <div class="buy_bt"><a href="{% url 'detail' kurtka.id %}">Satip aliw</a></div>
+                                    <div class="seemore_bt"><a href="{% url 'detail' kurtka.id %}">Kobirek</a></div>
+                                 </div>
+                              </div>
+                           </div>
+                           {% endfor %}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+            </div>
+            <a class="carousel-control-prev" href="#electronic_main_slider" role="button" data-slide="prev">
+            <i class="bi bi-caret-left"></i>
+            </a>
+            <a class="carousel-control-next" href="#electronic_main_slider" role="button" data-slide="next">
+            <i class="bi bi-caret-right"></i>
+            </a>
+         </div>
+      </div>
+      <!-- electronic section end -->
+      <!-- jewellery  section start -->
+      <div class="jewellery_section">
+         <div id="jewellery_main_slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <div class="container">
+                     <h1 class="fashion_taital">Rubashkalar </h1>
+                     <div class="fashion_section_2">
+                        <div class="row">
+                           {% for rubashka in rubashkalar %}
+                           <div class="col-lg-4 col-sm-4">
+                              <div class="box_main">
+                                 <h4 class="shirt_text">{{ rubashka.name }}</h4>
+                                 <p class="price_text">Bahasi  <span style="color: #262626;">{{ rubashka.price }}</span></p>
+                                 <div class="electronic_img">{% if rubashka.image %}<img src="{{ rubashka.image.url }}" alt="product_photo"> {% else %} <p>Photo not added</p> {% endif %}</div>
+                                 <div class="btn_main">
+                                    <div class="buy_bt"><a href="{% url 'detail' rubashka.id %}">Satip aliw</a></div>
+                                    <div class="seemore_bt"><a href="{% url 'detail' rubashka.id %}">Kobirek</a></div>
+                                 </div>
+                              </div>
+                           </div>
+                           {% endfor %}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="carousel-item">
+                  <div class="container">
+                     <h1 class="fashion_taital">Rubashkalar </h1>
+                     <div class="fashion_section_2">
+                        <div class="row">
+                           {% for rubashka in rubashkalar2 %}
+                           <div class="col-lg-4 col-sm-4">
+                              <div class="box_main">
+                                 <h4 class="shirt_text">{{rubashka.name}}</h4>
+                                 <p class="price_text">Bahasi  <span style="color: #262626;">{{ rubashka.price }}</span></p>
+                                 <div class="electronic_img">{% if rubashka.image %}<img src="{{ rubashka.image.url }}" alt="product_photo"> {% else %} <p>Photo not added</p> {% endif %}</div>
+                                 <div class="btn_main">
+                                    <div class="buy_bt"><a href="{% url 'detail' rubashka.id %}">Satip aliw</a></div>
+                                    <div class="seemore_bt"><a href="{% url 'detail' rubashka.id %}">Kobirek</a></div>
+                                 </div>
+                              </div>
+                           </div>
+                           {% endfor %}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="carousel-item">
+                  <div class="container">
+                     <h1 class="fashion_taital">Rubashkalar </h1>
+                     <div class="fashion_section_2">
+                        <div class="row">
+                           {% for rubashka in rubashkalar %}
+                           <div class="col-lg-4 col-sm-4">
+                              <div class="box_main">
+                                 <h4 class="shirt_text">{{ rubashka.name }}</h4>
+                                 <p class="price_text">Bahasi  <span style="color: #262626;">{{ rubashka.price }}</span></p>
+                                 <div class="electronic_img">{% if rubashka.image %}<img src="{{ rubashka.image.url }}" alt="product_photo"> {% else %} <p>Photo not added</p> {% endif %}</div>
+                                 <div class="btn_main">
+                                    <div class="buy_bt"><a href="{% url 'detail' rubashka.id %}">Satip aliw</a></div>
+                                    <div class="seemore_bt"><a href="{% url 'detail' rubashka.id %}">Kobirek</a></div>
+                                 </div>
+                              </div>
+                           </div>
+                           {% endfor %}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+            </div>
+            <a class="carousel-control-prev" href="#jewellery_main_slider" role="button" data-slide="prev">
+            <i class="bi bi-caret-left"></i>
+            </a>
+            <a class="carousel-control-next" href="#jewellery_main_slider" role="button" data-slide="next">
+            <i class="bi bi-caret-right"></i>
+            </a>
+            <div class="loader_main">
+               <div class="loader"></div>
+            </div>
+         </div>
+      </div>
+      <!-- jewellery  section end -->
+   {% endblock %}

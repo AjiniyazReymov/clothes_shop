@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Log in page {% endblock %}
+
+{% block content %}
+
+    <div class="row justify-content-center" >
+        <div class="col-lg-5 col-sm-4">
+              <div class="box_main">
+                 <h4 class="shirt_text">Login beti</h4>
+                 <div class="tshirt_img">
+                     <form method="post">
+                        {% csrf_token %}
+                        {{login_form | crispy}}
+                        <button class="btn btn-primary" type="submit">Login</button> Akkauntiniz joq ba? Onda <a href="{% url 'users:register' %}" style="color: #262626;" >REGISTRACIYAdan </a>otin</span>
+                    </form>
+                 </div>
+              </div>
+        </div>
+    </div>
+
+{% endblock %}

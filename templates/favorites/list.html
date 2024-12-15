@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Product Detail page {% endblock %}
+
+{% block content %}
+
+<div class="flex-container">
+        <div class="jewellery_section">
+         <div id="jewellery_main_slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <div class="container">
+                     <h1 class="fashion_taital">Saylandi tovarlar</h1>
+                     <div class="fashion_section_2">
+                        <div class="row justify-content-center">
+         {% for favorite in favorites %}
+        <div class="col-lg-4 col-sm-4 ">
+              <div class="box_main">
+                 <h4 class="shirt_text">{{ favorite.product.name }}</h4>
+                 <p class="price_text">Bahasi  <span style="color: #262626;">{{ favorite.product.price }}</span></p>
+                 <div class="tshirt_img">
+                     {% if favorite.product.image %}<img src="{{ favorite.product.image.url }}" alt="juqa_photo"> {% else %} <p>Photo not added</p> {% endif %}
+                     <div>
+                         <p>{{ favorite.product.description }}</p>
+                        <div class="buy_bt"><a href="{% url 'remove_from_favorites' favorite.product.id %}">Saylandidan oshiriw</a></div>
+
+                     </div>
+                 </div>
+              </div>
+        </div>
+        {% endfor %}
+    </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="loader_main">
+                <div class="justify-content-center">
+                         <button id="share-favorites-btn" class="price_text">Saylandilar linkin payda etiw </button>
+                        <p id="share-link"></p>
+                        <button id="copy-link-btn" style="display: none;" class="price_text">Linkti nusqalaw</button>
+
+                        <script>
+                            document.getElementById('share-favorites-btn').addEventListener('click', () => {
+                                fetch('/favorites/share/', {
+                                    method: 'GET',
+                                    headers: {
+                                        'X-Requested-With': 'XMLHttpRequest',
+                                    }
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.share_url) {
+                                        const shareLinkElement = document.getElementById('share-link');
+                                        const copyButton = document.getElementById('copy-link-btn');
+
+                                        // Отображаем ссылку
+                                        shareLinkElement.innerHTML = `<a href="${data.share_url}" target="_blank">${data.share_url}</a>`;
+                                        copyButton.style.display = 'inline-block';
+
+                                        // Сохраняем ссылку в кнопке
+                                        copyButton.setAttribute('data-clipboard-text', data.share_url);
+                                    } else {
+                                        alert(data.error || 'Link generaciyalawda qatelik boldi.');
+                                    }
+                                });
+                            });
+
+                            document.getElementById('copy-link-btn').addEventListener('click', () => {
+                                const copyText = document.getElementById('copy-link-btn').getAttribute('data-clipboard-text');
+                                if (navigator.clipboard) {
+                                    navigator.clipboard.writeText(copyText).then(() => {
+                                        alert('Link nusqalandi!');
+                                    }).catch(err => {
+                                        alert('Linkti nusqalaw imkani bolmadi: ' + err);
+                                    });
+                                } else {
+                                    // Альтернативный способ для старых браузеров
+                                    const tempInput = document.createElement('input');
+                                    document.body.appendChild(tempInput);
+                                    tempInput.value = copyText;
+                                    tempInput.select();
+                                    document.execCommand('copy');
+                                    document.body.removeChild(tempInput);
+                                    alert('Link nusqalandi!');
+                                }
+                            });
+                        </script>
+                    </div>
+               <div class="loader"></div>
+            </div>
+         </div>
+      </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+   {% block content %}
+
+    <div class="flex-container">
+        <div class="jewellery_section ">
+         <div id="jewellery_main_slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <div class="container">
+                     <h1 class="fashion_taital">Korzina</h1>
+                     <div class="fashion_section_2">
+                        <div class="row justify-content-center">
+
+        <div class="col-lg-8 col-sm-4 ">
+              <div class="box_main">
+                {% for item in order.items.all %}
+                        <div>
+                            {{ item.product.name }} - {{ item.quantity }} x {{ item.product.price }} = {{ item.get_total_price }} SO'M
+                            <p><a class="price_text" href="{% url 'order_remove' item.id %}">Oshiriw</a></p>
+                        </div>
+                    {% empty %}
+                  <h3>Korzina bos</h3>
+                    {% endfor %}
+<!--                    <p>Итого: {{ order.get_total_price }}</p>-->
+             </div>
+         </div>
+      </div>
+</div>
+
+</div>
+             </div>
+          </div>
+       </div>
+    </div>
+     </div>
+    </div>
+    </div>
+
+
+   {% endblock %}

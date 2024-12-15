@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Product Detail page {% endblock %}
+
+{% block content %}
+
+<div class="flex-container">
+        <div class="jewellery_section">
+         <div id="jewellery_main_slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <div class="container">
+                     <h1 class="fashion_taital">Saylandi tovarlar</h1>
+                     <div class="fashion_section_2">
+                        <div class="row justify-content-center">
+         {% for product in products %}
+        <div class="col-lg-4 col-sm-4 ">
+              <div class="box_main">
+                 <h4 class="shirt_text">{{ product.name }}</h4>
+                 <p class="price_text">Bahasi  <span style="color: #262626;">{{ product.price }}</span></p>
+                 <div class="tshirt_img">
+                     {% if product.image %}<img src="{{ product.image.url }}" alt="juqa_photo"> {% else %} <p>Photo not added</p> {% endif %}
+                     <div>
+                         <p>{{ product.description }}</p>
+
+                     </div>
+                 </div>
+              </div>
+        </div>
+        {% endfor %}
+    </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="loader_main">
+
+               <div class="loader"></div>
+            </div>
+         </div>
+      </div>
+    </div>
+
+{% endblock %}
+
+
